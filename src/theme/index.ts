@@ -18,12 +18,12 @@ const theme = createMuiTheme({
     },
     common: {
       black: '#222',
-      white: '#fafafa'
+      white: '#fafafa',
     },
     text: {
       primary: '#222',
       secondary: '#fafafa',
-    }
+    },
   },
   typography: {
     htmlFontSize: 16,
@@ -38,12 +38,12 @@ const theme = createMuiTheme({
       '"Segoe UI Symbol"',
     ].join(','),
     h1: {
-      fontSize: '1,625rem',
+      fontSize: '1.85rem',
     },
     button: {
       fontSize: '0.75rem',
     },
   },
-})
+});
 
-export { theme }
+export { theme };

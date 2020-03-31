@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import Header from './components/Header'
-import Menu from './components/Menu'
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Header from './components/Header';
+import Menu from './components/Menu';
 
-import bg from './images/bg.jpg'
+import bg from './images/bg.jpg';
 
 const useStyles = makeStyles({
   app: {
@@ -16,19 +16,17 @@ const useStyles = makeStyles({
   },
 });
 
+// TODO: router
 
-function App() {
+const App: React.FC = () => {
   const classes = useStyles();
+
   return (
-    <Grid
-      container
-      direction="column"
-      className={classes.app}
-    >
+    <Grid container direction="column" className={classes.app}>
       <Header title="Menu" />
       <Menu />
     </Grid>
   );
-}
+};
 
 export default App;
