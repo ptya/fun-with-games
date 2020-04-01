@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -6,37 +7,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '70px',
   },
-  button: {
-    color: theme.palette.text.primary,
-    borderTop: `solid 5px ${theme.palette.common.black}`,
-    borderBottom: `solid 5px ${theme.palette.common.black}`,
-    borderRadius: 0,
-    padding: '10px 0',
-    backgroundImage: `
-    linear-gradient(
-      to bottom,
-      #E8CFA0 20%,
-      #F0D050 20%,
-      #F0D050 85%,
-      #FDAB3B 85%
-      );
-    `,
-    '&:before': {
-      content: '""',
-      width: 5,
-      height: '100%',
-      background: theme.palette.common.black,
-      position: 'absolute',
-      right: -5,
-    },
-    '&:after': {
-      content: '""',
-      width: 5,
-      height: '100%',
-      background: theme.palette.common.black,
-      position: 'absolute',
-      left: -5,
-    },
+  link: {
+    width: '100%',
   },
 }));
 
@@ -45,19 +17,25 @@ const Menu: React.FC = () => {
   return (
     <Grid item container direction="column" alignItems="center" spacing={5} className={classes.container}>
       <Grid item container>
-        <Button color="primary" variant="contained" fullWidth className={classes.button}>
-          Now Playing
-        </Button>
+        <Link to="/now-playing" className={classes.link}>
+          <Button color="primary" variant="contained" fullWidth>
+            Now Playing
+          </Button>
+        </Link>
       </Grid>
       <Grid item container>
-        <Button color="primary" variant="contained" fullWidth className={classes.button}>
-          My Games
-        </Button>
+        <Link to="/my-games" className={classes.link}>
+          <Button color="primary" variant="contained" fullWidth>
+            My Games
+          </Button>
+        </Link>
       </Grid>
       <Grid item container>
-        <Button color="primary" variant="contained" fullWidth className={classes.button}>
-          Search
-        </Button>
+        <Link to="/search" className={classes.link}>
+          <Button color="primary" variant="contained" fullWidth>
+            Search
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );
