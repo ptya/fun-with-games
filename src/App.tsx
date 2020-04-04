@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-// TODO: router
+// TODO: create my games store!
 
 const App: React.FC = () => {
   const classes = useStyles();

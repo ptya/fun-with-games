@@ -1,13 +1,14 @@
 import React from 'react';
-import { Grid, Paper, Typography, makeStyles } from '@material-ui/core';
+import { Grid, Paper, Typography, makeStyles, Button } from '@material-ui/core';
 import { useParams, useLocation } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import { GET_GAME } from '../queries';
-import { GameData, GameVars } from '../queries';
+import { GameData, GameVars, AddGameData, AddGameVars } from '../types';
 
 import Header from './Header';
 import Back from './Back';
+import { ADD_GAME } from '../mutations';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.bordered,
     marginTop: '1rem',
   },
+  addButton: {
+    backgroundImage: `
+        linear-gradient(
+          to bottom,
+          #41C853 20%,
+          #3AB54B 20%,
+          #3AB54B 85%,
+          #2A8C38 85%
+          );
+        `,
+  },
 }));
 
 // TODO: have a default picture for games not having cover
@@ -49,6 +61,12 @@ const Game: React.FC = () => {
     },
   });
 
+  const [addGame] = useMutation<AddGameData, AddGameVars>(ADD_GAME);
+
+  const handleAdd = () => {
+    addGame({ variables: { id } });
+  };
+
   if (loading) return <p>Loading</p>; //TODO:
   if (error) return <p>ERROR</p>; //TODO:
   if (!data) return <p>Not found</p>; //TODO:
@@ -56,7 +74,7 @@ const Game: React.FC = () => {
   return (
     <>
       <Header title={name!} isSmall />
-      <Grid item container direction="column" spacing={5}>
+      <Grid item container direction="column" spacing={3}>
         <Grid item>
           <Paper className={classes.paper}>
             {data.game.releaseDate && (
@@ -115,6 +133,11 @@ const Game: React.FC = () => {
               </Grid>
             )}
           </Paper>
+        </Grid>
+        <Grid item>
+          <Button onClick={handleAdd} variant="contained" fullWidth className={classes.addButton}>
+            Add Game
+          </Button>
         </Grid>
         <Back />
       </Grid>

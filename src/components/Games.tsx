@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 import { GET_GAMES } from '../queries';
-import { GameSearchData, GameSearchVars } from '../queries';
+import { GameSearchData, GameSearchVars } from '../types';
 
 import Back from './Back';
 
