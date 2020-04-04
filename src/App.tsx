@@ -7,6 +7,7 @@ import Menu from './components/Menu';
 import NowPlaying from './components/NowPlaying';
 import MyGames from './components/MyGames';
 import Games from './components/Games';
+import Game from './components/Game';
 import Search from './components/Search';
 
 import bg from './images/bg.jpg';
@@ -38,13 +39,16 @@ const App: React.FC = () => {
             <Header title="My Games" />
             <MyGames />
           </Route>
+          <Route path="/search">
+            <Header title="Search" />
+            <Search />
+          </Route>
           <Route path="/games/:search">
             <Header title="Results" />
             <Games />
           </Route>
-          <Route path="/search">
-            <Header title="Search" />
-            <Search />
+          <Route path="/game/:name">
+            <Game />
           </Route>
           <Route path="/">
             <Header title="Menu" />

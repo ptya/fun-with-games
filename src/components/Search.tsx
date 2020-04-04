@@ -74,7 +74,7 @@ const Search: React.FC = () => {
   };
 
   return (
-    <Grid container direction="column" alignItems="center" spacing={2} className={classes.container}>
+    <Grid container direction="column" spacing={2} className={classes.container}>
       <Grid item>
         <form noValidate autoComplete="off" onSubmit={onSubmit}>
           <Grid container direction="column" spacing={2}>

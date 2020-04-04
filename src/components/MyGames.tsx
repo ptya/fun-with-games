@@ -5,7 +5,7 @@ import Back from './Back';
 
 const MyGames: React.FC = () => {
   return (
-    <Grid container direction="column" alignItems="center">
+    <Grid item container direction="column" alignItems="center">
       <Grid item>MyGames</Grid>
       <Back />
     </Grid>

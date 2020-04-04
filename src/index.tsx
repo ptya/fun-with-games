@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { theme } from './theme';
 
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  uri: 'https://vglist.co/graphql',
+  cache: cache,
+  headers: {
+    'X-User-Email': 'petr.szab@gmail.com',
+    'X-User-Token': process.env.REACT_APP_VGLIST,
+  },
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <CssBaseline />
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
