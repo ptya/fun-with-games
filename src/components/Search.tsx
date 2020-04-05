@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Grid, TextField, makeStyles, Button } from '@material-ui/core';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Grid, makeStyles, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Form } from 'react-final-form';
+import { TextField } from 'mui-rff';
 
 import Back from './Back';
 
@@ -42,68 +44,74 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: '3rem',
+    '& .MuiFormHelperText-root': {
+      display: 'none',
+    },
   },
   back: {
     marginTop: '6rem',
   },
 }));
 
-const Search: React.FC = () => {
-  const [name, setName] = useState('');
-  const [isError, setError] = useState(false);
+interface FormData {
+  name: string;
+}
 
+const Search: React.FC = () => {
   const history = useHistory();
-  const location = useLocation();
-  console.log(location);
   const classes = useStyles();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    if (isError && value.length > 0) {
-      setError(false);
-    }
-    setName(value);
+  const initialValues = {
+    name: '',
   };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (name.length < 1) {
-      setError(true);
-    } else {
-      history.push(`games/${name}`);
+
+  const onSubmit = (values: FormData) => {
+    history.push(`games/${values.name}`);
+  };
+
+  const validate = async (values: FormData) => {
+    if (!values.name) {
+      return { name: 'required' };
     }
+    return;
   };
 
   return (
     <Grid container direction="column" spacing={2} className={classes.container}>
       <Grid item>
-        <form noValidate autoComplete="off" onSubmit={onSubmit}>
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <TextField
-                id="name"
-                name="name"
-                placeholder="Witcher 3"
-                value={name}
-                onChange={handleChange}
-                variant="outlined"
-                autoFocus
-                fullWidth
-                InputProps={{
-                  classes: {
-                    root: classes.root,
-                    error: classes.error,
-                  },
-                }}
-                error={isError}
-              />
-            </Grid>
-            <Grid item>
-              <Button type="submit" color="primary" variant="contained" fullWidth>
-                Search
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
+        <Form
+          onSubmit={onSubmit}
+          validate={validate}
+          initialValues={initialValues}
+          render={({ handleSubmit }) => (
+            <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+              <Grid container direction="column" spacing={2}>
+                <Grid item>
+                  <TextField
+                    id="name"
+                    name="name"
+                    placeholder="Witcher 3"
+                    variant="outlined"
+                    autoFocus
+                    fullWidth
+                    required={true}
+                    InputProps={{
+                      classes: {
+                        root: classes.root,
+                        error: classes.error,
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button type="submit" color="primary" variant="contained" fullWidth>
+                    Search
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          )}
+        />
       </Grid>
       <Back className={classes.back} />
     </Grid>
