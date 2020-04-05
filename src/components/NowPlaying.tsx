@@ -18,6 +18,7 @@ import Back from './Back';
 const useStyles = makeStyles((theme) => ({
   image: {
     display: 'block',
+    maxWidth: '100%',
   },
   imageContainer: {
     ...theme.mixins.bordered,

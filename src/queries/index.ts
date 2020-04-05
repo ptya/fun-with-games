@@ -88,6 +88,7 @@ export const MY_GAMES = gql`
           game {
             id
             name
+            coverUrl
           }
         }
         pageInfo {
