@@ -146,7 +146,7 @@ const theme = createMuiTheme({
         borderTop: `solid 5px #222`,
         borderBottom: `solid 5px #222`,
         borderRadius: 0,
-        padding: '10px 0',
+        padding: '10px 5px',
         '&:before': {
           content: '""',
           width: 5,

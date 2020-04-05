@@ -15,7 +15,7 @@ interface Genre {
   name: string;
 }
 
-interface Game {
+export interface Game {
   id: number;
   name: string;
   coverUrl?: string;

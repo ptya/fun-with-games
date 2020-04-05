@@ -1,11 +1,12 @@
 import React from 'react';
 import { Grid, Button } from '@material-ui/core';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 import { GET_GAMES } from '../queries';
 import { GameSearchData, GameSearchVars } from '../types';
 
+import GameList from './GameList';
 import Back from './Back';
 
 // TODO: if endpoint comes back empty
@@ -26,26 +27,7 @@ const Games: React.FC = () => {
   if (!data) return <p>Not found</p>; //TODO:
   return (
     <Grid item container direction="column" alignItems="center">
-      <Grid item>Games</Grid>
-      <Grid item>
-        {data.gameSearch &&
-          data.gameSearch.nodes &&
-          data.gameSearch.nodes.map((game: any) => (
-            <Link
-              key={game.id}
-              to={{
-                pathname: `/game/${game.name}`,
-                state: {
-                  id: game.id,
-                },
-              }}
-            >
-              <p>
-                {game.name} + {game.id}
-              </p>
-            </Link>
-          ))}
-      </Grid>
+      <GameList games={data.gameSearch.nodes} />
       {data.gameSearch && data.gameSearch.pageInfo && data.gameSearch.pageInfo.hasNextPage && (
         <Button
           onClick={() =>
